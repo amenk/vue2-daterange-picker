@@ -4,7 +4,7 @@
             <slot name="input">
                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
                 <span v-if="dateFilterApplied">{{startText}} - {{endText}}</span>
-                <span v-else>Please select a date range.</span>
+                <span v-else>Zeitraum auswählen.</span>
                 <b class="caret"></b>
             </slot>
         </div>
@@ -59,6 +59,8 @@
     import { nextMonth, prevMonth, thisMonth, thisYear, lastWeek, lastMonth } from './util'
     import { mixin as clickaway } from 'vue-clickaway'
 
+    moment.locale('de');
+
     export default {
         components: {Calendar, CalendarRanges},
         mixins: [clickaway],
@@ -82,11 +84,11 @@
             ranges: {
                 type: Object,
                 default () {
-                    return {
-                        'This month': new Date(),
-                        'This year': new Date(),
-                        'Last week': new Date(),
-                        'Last month': new Date(),
+                    return {//TODO this should be set via a locale file
+                        'Dieser Monat': new Date(),
+                        'Dieses Jahr': new Date(),
+                        'Letzte Woche': new Date(),
+                        'Letzter Monat': new Date(),
                     }
                 }
             },
@@ -98,10 +100,10 @@
         data () {
             let default_locale = {
                 direction: 'ltr',
-                format: moment.localeData().longDateFormat('L'),
+                format: moment.localeData('de').longDateFormat('L'),
                 separator: ' - ',
-                applyLabel: 'Apply',
-                cancelLabel: 'Cancel',
+                applyLabel: 'Anwenden',
+                cancelLabel: 'Abbrechen',
                 weekLabel: 'W',
                 customRangeLabel: 'Custom Range',
                 daysOfWeek: moment.weekdaysMin(),
@@ -200,16 +202,16 @@
             selectRange(rangeType) {
                 let dateRange = {}
                 switch( rangeType ) {
-                  case 'This month':
+                  case 'Dieser Monat':
                     this.selectThisMonth()
                     break;
-                  case 'This year':
+                  case 'Dieses Jahr':
                     this.selectThisYear()
                     break;
-                  case 'Last week':
+                  case 'Letzte Woche':
                     this.selectLastWeek()
                     break;
-                  case 'Last month':
+                  case 'Letzter Monat':
                     this.selectLastMonth()
                     break;
                   default:
