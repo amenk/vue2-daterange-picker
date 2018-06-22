@@ -248,5 +248,5 @@
 </script>
 
 <style>
-    @import '../styles/DateRangePicker.scss'
+    @import '../styles/DateRangePicker.scss';
 </style>
