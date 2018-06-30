@@ -101,5 +101,5 @@
 </script>
 
 <style>
-    @import '../styles/Calendar.scss'
+    @import '../styles/Calendar.scss';
 </style>
